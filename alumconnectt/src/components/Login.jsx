@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import { signInAPI } from "../redux/actions";
+
 // m: ig used fro doing Container and all
 const Login = () => {
   return (
@@ -19,7 +21,7 @@ const Login = () => {
           <img src="./images/login-hero.svg " alt="image of login" />
         </Hero>
         <Form>
-          <Google>
+          <Google onClick={() => props.signIn()}>
             <img src="/images/google.svg" />
             sign in with google
           </Google>
@@ -153,4 +155,15 @@ const Google = styled.button`
   }
 `;
 
+const mapStateToProps = (state) => {
+  return {
+    user: state.userState.user,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    signIn: () => dispatch(signInAPI()),
+  };
+};
 export default Login;
